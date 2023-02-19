@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "uralsib2beancount": {
+      "commandName": "Project",
+      "commandLineArgs": "c:\\personal\\igorfiles\\money_beancount\\config.toml c:\\p\\uralsib2beancount\\uralsib_output.beancount c:\\p\\uralsib2beancount\\export.csv c:\\p\\uralsib2beancount\\export_mir.csv "
+    }
+  }
+}
