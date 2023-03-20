@@ -11,7 +11,7 @@ string outputFile = args[1];
 
 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-var config = Toml.ToModel(File.ReadAllText(configFile));
+var config = Toml.ToModel(File.ReadAllText(configFile, Encoding.UTF8));
 TomlTable cardsTable = (TomlTable)config["cards"];
 TomlTable categoriesTable = (TomlTable)config["categories"];
 TomlTable csvLastNonHeaderTable = (TomlTable)config["uralsib_csv_last_nonheader"];
@@ -54,7 +54,7 @@ for (int argN = 2; argN < args.Length; argN++)
 
 
 
-using (StreamWriter writer = new StreamWriter(outputFile))
+using (StreamWriter writer = new StreamWriter(outputFile, false, Encoding.UTF8))
 {
     foreach (var t in transactions.OrderBy(t => t.Date))
     {
@@ -72,7 +72,7 @@ using (StreamWriter writer = new StreamWriter(outputFile))
         {
             account = "XX";
         }
-        writer.WriteLine($"  {account}     {t.TotalValue.ToString("F2")} {t.Currency ?? "XXX"}");
+        writer.WriteLine($"  {account}     {t.TotalValue.ToString("F2", CultureInfo.InvariantCulture)} {t.Currency ?? "XXX"}");
 
         // Write category
         if (t.Description == "Перевод между счетами")
